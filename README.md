@@ -40,14 +40,6 @@ python src/train.py --epochs 10
 ```
 Ejecutar desde la raíz del repositorio. También puede abrir `notebooks/experiment.ipynb` en Google Colab; active GPU en el entorno de ejecución para acelerar el entrenamiento. Los gráficos se generan al completar las épocas y deben subirse al repositorio.
 
-## Entrega
-Repositorio público en GitHub, con scripts, notebook ejecutado, README actualizado y gráficos reales en `outputs/`.
+`.
 
-## Google Colab (instrucciones directas)
-1. Descarga el ZIP y abre `notebooks/experiment.ipynb` en Google Colab (Archivo → Subir cuaderno).
-2. Activa GPU T4 en Entorno de ejecución → Cambiar tipo de entorno de ejecución.
-3. Ejecuta la primera celda de código y selecciona **el ZIP completo** cuando aparezca el selector.
-4. Ejecuta las siguientes celdas en orden, espera al entrenamiento y descarga `resultados_CNN_semilla59.zip`.
-5. Extrae sus imágenes y súbelas a `outputs/` de GitHub; actualiza el README con las métricas reales y sustituye el notebook por la versión ejecutada.
 
-**Nota:** La semilla 59 usa los últimos dos dígitos numéricos de `020201359C`, no los últimos dos caracteres (`9C`). Confirma este criterio con el docente.
