@@ -1,19 +1,21 @@
-EVALUACIÓN DE LA SEGUNDA UNIDAD – INTELIGENCIA ARTIFICIAL
+# EVALUACIÓN DE LA SEGUNDA UNIDAD – INTELIGENCIA ARTIFICIAL
 
-Clasificación de imágenes mediante CNN, flujo de tensores 4D y análisis de métricas
+## Clasificación de imágenes mediante CNN, flujo de tensores 4D y análisis de métricas
 
-Universidad: Universidad Andina del Cusco
-Escuela Profesional: Ingeniería de Sistemas
-Asignatura: Inteligencia Artificial
-Estudiante: Hamlet Nayeli Delgado Ccorihuaman
-Código de matrícula: 020201359C
-Semilla utilizada: 59 (dos últimos dígitos numéricos; pendiente de confirmación por la letra final C)
-Dataset: CIFAR-10
-Lenguaje de programación: Python
-Framework: PyTorch
-Entorno de desarrollo: Google Colab y Visual Studio Code
+**Universidad:** Universidad Andina del Cusco  
+**Escuela Profesional:** Ingeniería de Sistemas  
+**Asignatura:** Inteligencia Artificial  
+**Estudiante:** Hamlet Nayeli Delgado Ccorihuaman  
+**Código de matrícula:** 020201359C  
+**Semilla utilizada:** 59 (dos últimos dígitos numéricos; pendiente de confirmación por la letra final C)  
+**Dataset:** CIFAR-10  
+**Lenguaje de programación:** Python  
+**Framework:** PyTorch  
+**Entorno de desarrollo:** Google Colab y Visual Studio Code  
 
-1. DESCRIPCIÓN GENERAL DEL PROYECTO
+---
+
+# 1. DESCRIPCIÓN GENERAL DEL PROYECTO
 
 El presente proyecto desarrolla un sistema de clasificación automática de imágenes mediante una Red Neuronal Convolucional (CNN), utilizando el dataset CIFAR-10 y el framework PyTorch.
 
@@ -21,142 +23,83 @@ El propósito es implementar un flujo completo de aprendizaje profundo que compr
 
 El desarrollo se encuentra organizado en cuatro componentes principales, correspondientes a las preguntas de la evaluación de la segunda unidad.
 
-1.1. Objetivo general
+## 1.1. Objetivo general
 
 Implementar y evaluar una red neuronal convolucional para clasificar imágenes del dataset CIFAR-10, utilizando técnicas de preprocesamiento, aumento de datos, partición estratificada y evaluación mediante métricas de rendimiento.
 
-1.2. Objetivos específicos
+## 1.2. Objetivos específicos
 
-Cargar y explorar el dataset CIFAR-10 mediante herramientas de visión por computador.
+1. Cargar y explorar el dataset CIFAR-10 mediante herramientas de visión por computador.
+2. Aplicar transformaciones y técnicas de aumento de datos para mejorar la capacidad de generalización del modelo.
+3. Implementar una partición estratificada utilizando una semilla individual.
+4. Diseñar una arquitectura CNN adecuada para imágenes RGB.
+5. Verificar el flujo de tensores 4D a través de las capas convolucionales.
+6. Entrenar el modelo mediante CrossEntropyLoss y el optimizador Adam.
+7. Evaluar el rendimiento mediante accuracy, loss y matriz de confusión.
+8. Analizar posibles síntomas de overfitting o underfitting.
 
-Aplicar transformaciones y técnicas de aumento de datos para mejorar la capacidad de generalización del modelo.
+---
 
-Implementar una partición estratificada utilizando una semilla individual.
-
-Diseñar una arquitectura CNN adecuada para imágenes RGB.
-
-Verificar el flujo de tensores 4D a través de las capas convolucionales.
-
-Entrenar el modelo mediante CrossEntropyLoss y el optimizador Adam.
-
-Evaluar el rendimiento mediante accuracy, loss y matriz de confusión.
-
-Analizar posibles síntomas de overfitting o underfitting.
-
-2. DATASET UTILIZADO: CIFAR-10
+# 2. DATASET UTILIZADO: CIFAR-10
 
 CIFAR-10 es un conjunto de datos ampliamente utilizado para desarrollar y evaluar modelos de clasificación de imágenes.
 
 Contiene 60 000 imágenes RGB de 32 × 32 píxeles, distribuidas en diez categorías.
 
-2.1. Características del dataset
+## 2.1. Características del dataset
 
-Característica
+| Característica | Descripción |
+|---|---|
+| Dataset | CIFAR-10 |
+| Total de imágenes | 60 000 |
+| Imágenes de entrenamiento originales | 50 000 |
+| Imágenes de prueba | 10 000 |
+| Resolución | 32 × 32 píxeles |
+| Canales | 3 (RGB) |
+| Número de clases | 10 |
+| Formato de tensores | NCHW |
 
-Descripción
-
-Dataset
-
-CIFAR-10
-
-Total de imágenes
-
-60 000
-
-Imágenes de entrenamiento originales
-
-50 000
-
-Imágenes de prueba
-
-10 000
-
-Resolución
-
-32 × 32 píxeles
-
-Canales
-
-3 (RGB)
-
-Número de clases
-
-10
-
-Formato de tensores
-
-NCHW
-
-2.2. Clases del dataset
+## 2.2. Clases del dataset
 
 Las diez categorías son:
 
-Avión (Airplane)
+1. Avión (Airplane)
+2. Automóvil (Automobile)
+3. Pájaro (Bird)
+4. Gato (Cat)
+5. Ciervo (Deer)
+6. Perro (Dog)
+7. Rana (Frog)
+8. Caballo (Horse)
+9. Barco (Ship)
+10. Camión (Truck)
 
-Automóvil (Automobile)
-
-Pájaro (Bird)
-
-Gato (Cat)
-
-Ciervo (Deer)
-
-Perro (Dog)
-
-Rana (Frog)
-
-Caballo (Horse)
-
-Barco (Ship)
-
-Camión (Truck)
-
-2.3. Distribución de los datos
+## 2.3. Distribución de los datos
 
 Se implementó una partición estratificada del conjunto original de entrenamiento, utilizando el 80 % para entrenamiento y el 20 % para validación.
 
-Conjunto
-
-Cantidad de imágenes
-
-Porcentaje del total
-
-Entrenamiento
-
-40 000
-
-66,67 %
-
-Validación
-
-10 000
-
-16,67 %
-
-Prueba
-
-10 000
-
-16,67 %
-
-Total
-
-60 000
-
-100 %
+| Conjunto | Cantidad de imágenes | Porcentaje del total |
+|---|---:|---:|
+| Entrenamiento | 40 000 | 66,67 % |
+| Validación | 10 000 | 16,67 % |
+| Prueba | 10 000 | 16,67 % |
+| **Total** | **60 000** | **100 %** |
 
 La partición estratificada permite conservar la proporción de las clases originales en los conjuntos de entrenamiento y validación.
 
 El conjunto oficial de prueba permanece independiente y se utiliza únicamente para la evaluación final.
 
-3. PREGUNTA 1: CARGA, VISUALIZACIÓN, TRANSFORMACIONES Y PARTICIÓN
+---
 
-3.1. Configuración de la semilla
+# 3. PREGUNTA 1: CARGA, VISUALIZACIÓN, TRANSFORMACIONES Y PARTICIÓN
+
+## 3.1. Configuración de la semilla
 
 Para controlar la aleatoriedad del experimento, se utilizó la semilla individual 59, obtenida de los dos últimos dígitos numéricos del código de matrícula 020201359C.
 
 La configuración se implementó mediante:
 
+```python
 import random
 import numpy as np
 import torch
@@ -169,72 +112,70 @@ torch.manual_seed(SEED)
 
 if torch.cuda.is_available():
     torch.cuda.manual_seed_all(SEED)
+```
 
 Esta configuración permite controlar la inicialización aleatoria de los pesos, la selección de muestras y otros procesos estocásticos.
 
 Sin embargo, la reproducibilidad exacta también depende del hardware, las versiones de las librerías y las operaciones utilizadas.
 
-3.2. Carga de CIFAR-10
+## 3.2. Carga de CIFAR-10
 
-El dataset se obtiene mediante la biblioteca torchvision.datasets, que proporciona acceso a conjuntos de datos estándar de visión por computador.
+El dataset se obtiene mediante la biblioteca `torchvision.datasets`, que proporciona acceso a conjuntos de datos estándar de visión por computador.
 
 La carga se encuentra implementada en:
 
-src/dataset.py
+`src/dataset.py`
 
-3.3. Visualización exploratoria
+## 3.3. Visualización exploratoria
 
 Se implementó una visualización de 16 imágenes seleccionadas del conjunto de datos, mostrando sus etiquetas reales.
 
 Esta exploración permite identificar visualmente las características generales de las categorías y comprobar la correcta asociación entre las imágenes y sus clases.
 
-Muestras del dataset
+### Muestras del dataset
 
+![Muestras CIFAR-10](outputs/samples.png)
 
+## 3.4. Transformaciones aplicadas
 
-3.4. Transformaciones aplicadas
+Se utilizó un pipeline de transformaciones mediante `torchvision.transforms`.
 
-Se utilizó un pipeline de transformaciones mediante torchvision.transforms.
+### Transformaciones de entrenamiento
 
-Transformaciones de entrenamiento
+- `RandomCrop(32, padding=4)`: realiza recortes aleatorios para generar variaciones espaciales.
+- `RandomHorizontalFlip(p=0.5)`: aplica inversiones horizontales aleatorias.
+- `ToTensor()`: convierte las imágenes en tensores de PyTorch.
+- `Normalize()`: normaliza los valores de los canales RGB.
 
-RandomCrop(32, padding=4): realiza recortes aleatorios para generar variaciones espaciales.
-
-RandomHorizontalFlip(p=0.5): aplica inversiones horizontales aleatorias.
-
-ToTensor(): convierte las imágenes en tensores de PyTorch.
-
-Normalize(): normaliza los valores de los canales RGB.
-
-Transformaciones de validación y prueba
+### Transformaciones de validación y prueba
 
 Se aplicaron únicamente:
 
-Conversión a tensor.
-
-Normalización RGB.
+- Conversión a tensor.
+- Normalización RGB.
 
 No se aplicaron aumentos aleatorios durante la validación ni durante la prueba.
 
 Esta separación permite evaluar el modelo sobre imágenes sin alteraciones aleatorias adicionales.
 
-3.5. Partición estratificada
+## 3.5. Partición estratificada
 
 Se utilizó una partición estratificada con la semilla 59.
 
 El conjunto de entrenamiento original se dividió en:
 
-40 000 imágenes para entrenamiento.
-
-10 000 imágenes para validación.
+- 40 000 imágenes para entrenamiento.
+- 10 000 imágenes para validación.
 
 Las 10 000 imágenes oficiales de prueba se conservaron de forma independiente.
 
 Esta estrategia permite evaluar el aprendizaje del modelo sin utilizar las imágenes de prueba para actualizar sus parámetros.
 
-4. PREGUNTA 2: JUSTIFICACIÓN DE CNN FRENTE A MLP
+---
 
-4.1. Limitaciones de un perceptrón multicapa
+# 4. PREGUNTA 2: JUSTIFICACIÓN DE CNN FRENTE A MLP
+
+## 4.1. Limitaciones de un perceptrón multicapa
 
 Un Perceptrón Multicapa (MLP) es una arquitectura neuronal formada principalmente por capas totalmente conectadas.
 
@@ -254,143 +195,72 @@ Esta cantidad corresponde únicamente a la primera capa densa.
 
 Por lo tanto, una arquitectura MLP puede presentar un elevado costo computacional y una mayor dificultad para aprovechar eficientemente los patrones espaciales de las imágenes.
 
-4.2. Ventajas de las redes neuronales convolucionales
+## 4.2. Ventajas de las redes neuronales convolucionales
 
 Las Redes Neuronales Convolucionales (CNN) están diseñadas para procesar información con estructura espacial.
 
 Sus principales ventajas son:
 
-Conectividad local
+### Conectividad local
 
 Las neuronas convolucionales procesan regiones específicas de la imagen mediante filtros de tamaño reducido.
 
 Esto permite identificar características como bordes, texturas y formas.
 
-Compartición de pesos (Weight Sharing)
+### Compartición de pesos (Weight Sharing)
 
 Un mismo filtro convolucional utiliza los mismos parámetros en diferentes posiciones de la imagen.
 
 Esta propiedad reduce considerablemente la cantidad de parámetros necesarios.
 
-Equivarianza espacial
+### Equivarianza espacial
 
 Las operaciones convolucionales permiten que los mapas de características respondan a patrones similares presentes en distintas posiciones.
 
 La combinación de convoluciones, pooling y aumento de datos puede aportar cierta robustez frente a desplazamientos y transformaciones.
 
-Extracción jerárquica de características
+### Extracción jerárquica de características
 
 Las primeras capas identifican características simples, mientras que las capas posteriores pueden combinar dichas características para representar patrones más complejos.
 
-4.3. Comparación CNN frente a MLP
+## 4.3. Comparación CNN frente a MLP
 
-Característica
-
-MLP
-
-CNN
-
-Procesamiento de imágenes
-
-Mediante vectores aplanados
-
-Mediante filtros convolucionales
-
-Estructura espacial
-
-No se conserva explícitamente
-
-Se aprovecha directamente
-
-Compartición de pesos
-
-No
-
-Sí
-
-Conexiones locales
-
-No en capas densas convencionales
-
-Sí
-
-Cantidad de parámetros
-
-Puede ser elevada
-
-Generalmente más eficiente para imágenes
-
-Extracción de características
-
-Aprendizaje global mediante capas densas
-
-Aprendizaje jerárquico de características espaciales
+| Característica | MLP | CNN |
+|---|---|---|
+| Procesamiento de imágenes | Mediante vectores aplanados | Mediante filtros convolucionales |
+| Estructura espacial | No se conserva explícitamente | Se aprovecha directamente |
+| Compartición de pesos | No | Sí |
+| Conexiones locales | No en capas densas convencionales | Sí |
+| Cantidad de parámetros | Puede ser elevada | Generalmente más eficiente para imágenes |
+| Extracción de características | Aprendizaje global mediante capas densas | Aprendizaje jerárquico de características espaciales |
 
 En consecuencia, se seleccionó una arquitectura CNN por su capacidad para aprovechar la organización espacial de las imágenes CIFAR-10 y reducir la complejidad del procesamiento respecto a una arquitectura totalmente conectada convencional.
 
-5. ARQUITECTURA DE LA RED NEURONAL CONVOLUCIONAL
+---
+
+# 5. ARQUITECTURA DE LA RED NEURONAL CONVOLUCIONAL
 
 Se diseñó una CNN compuesta por tres bloques convolucionales y dos capas densamente conectadas.
 
 Cada bloque convolucional incluye:
 
-Conv2d.
+- Conv2d.
+- ReLU.
+- MaxPool2d.
 
-ReLU.
+## 5.1. Especificación de capas
 
-MaxPool2d.
+| Etapa | Operación | Tensor de salida |
+|---|---|---|
+| Entrada | Imagen RGB | (8, 3, 32, 32) |
+| Bloque 1 | Conv2d(3,32,3,padding=1), ReLU, MaxPool2d(2) | (8, 32, 16, 16) |
+| Bloque 2 | Conv2d(32,64,3,padding=1), ReLU, MaxPool2d(2) | (8, 64, 8, 8) |
+| Bloque 3 | Conv2d(64,128,3,padding=1), ReLU, MaxPool2d(2) | (8, 128, 4, 4) |
+| Aplanado | Flatten | (8, 2048) |
+| Capa densa | Linear(2048,256), ReLU, Dropout(0.3) | (8, 256) |
+| Salida | Linear(256,10) | (8, 10) |
 
-5.1. Especificación de capas
-
-Etapa
-
-Operación
-
-Tensor de salida
-
-Entrada
-
-Imagen RGB
-
-(8, 3, 32, 32)
-
-Bloque 1
-
-Conv2d(3,32,3,padding=1), ReLU, MaxPool2d(2)
-
-(8, 32, 16, 16)
-
-Bloque 2
-
-Conv2d(32,64,3,padding=1), ReLU, MaxPool2d(2)
-
-(8, 64, 8, 8)
-
-Bloque 3
-
-Conv2d(64,128,3,padding=1), ReLU, MaxPool2d(2)
-
-(8, 128, 4, 4)
-
-Aplanado
-
-Flatten
-
-(8, 2048)
-
-Capa densa
-
-Linear(2048,256), ReLU, Dropout(0.3)
-
-(8, 256)
-
-Salida
-
-Linear(256,10)
-
-(8, 10)
-
-5.2. Justificación de la arquitectura
+## 5.2. Justificación de la arquitectura
 
 Los bloques convolucionales permiten aumentar progresivamente la cantidad de mapas de características.
 
@@ -402,36 +272,38 @@ La capa Dropout introduce regularización durante el entrenamiento, desactivando
 
 Finalmente, la última capa Linear genera diez valores de salida, correspondientes a las diez categorías de CIFAR-10.
 
-6. PREGUNTA 3: MANIPULACIÓN DE TENSORES 4D
+---
 
-6.1. Estructura de los tensores
+# 6. PREGUNTA 3: MANIPULACIÓN DE TENSORES 4D
+
+## 6.1. Estructura de los tensores
 
 Las redes neuronales convolucionales de PyTorch procesan imágenes mediante tensores de cuatro dimensiones.
 
 Su estructura es:
 
-(Batch Size, Channels, Height, Width)
+**(Batch Size, Channels, Height, Width)**
 
 Donde:
 
-Batch Size: cantidad de imágenes procesadas simultáneamente.
+- Batch Size: cantidad de imágenes procesadas simultáneamente.
+- Channels: cantidad de canales de la imagen o mapas de características.
+- Height: altura.
+- Width: anchura.
 
-Channels: cantidad de canales de la imagen o mapas de características.
-
-Height: altura.
-
-Width: anchura.
-
-6.2. Validación del Forward Pass
+## 6.2. Validación del Forward Pass
 
 Se utilizó un lote simulado de ocho imágenes RGB con dimensiones de 32 × 32 píxeles.
 
 El tensor inicial presenta la forma:
 
+```text
 torch.Size([8, 3, 32, 32])
+```
 
 Durante el procesamiento se obtienen las siguientes dimensiones esperadas:
 
+```text
 Entrada:   torch.Size([8, 3, 32, 32])
 
 Bloque 1:  torch.Size([8, 32, 16, 16])
@@ -443,8 +315,9 @@ Bloque 3:  torch.Size([8, 128, 4, 4])
 Flatten:   torch.Size([8, 2048])
 
 Salida:    torch.Size([8, 10])
+```
 
-6.3. Cálculo de la dimensión de aplanado
+## 6.3. Cálculo de la dimensión de aplanado
 
 Después del tercer bloque convolucional, cada imagen presenta 128 mapas de características de tamaño 4 × 4.
 
@@ -454,73 +327,43 @@ Por lo tanto:
 
 Este resultado determina el número de entradas de la primera capa totalmente conectada.
 
-6.4. Validación mediante aserción
+## 6.4. Validación mediante aserción
 
 Se implementó una prueba utilizando:
 
+```python
 assert output.shape == (8, 10)
+```
 
 La aserción permite comprobar que la salida del modelo tenga las dimensiones esperadas.
 
 La implementación se encuentra en:
 
-src/model.py
+`src/model.py`
 
-7. PREGUNTA 4: ENTRENAMIENTO Y EVALUACIÓN
+---
 
-7.1. Configuración del entrenamiento
+# 7. PREGUNTA 4: ENTRENAMIENTO Y EVALUACIÓN
+
+## 7.1. Configuración del entrenamiento
 
 Se establecieron los siguientes hiperparámetros:
 
-Hiperparámetro
+| Hiperparámetro | Valor |
+|---|---|
+| Modelo | CNN |
+| Dataset | CIFAR-10 |
+| Semilla | 59 |
+| Épocas | 10 |
+| Batch Size | 64 |
+| Learning Rate | 0.001 |
+| Función de pérdida | CrossEntropyLoss |
+| Optimizador | Adam |
+| Conjunto de entrenamiento | 40 000 imágenes |
+| Conjunto de validación | 10 000 imágenes |
+| Conjunto de prueba | 10 000 imágenes |
 
-Valor
-
-Modelo
-
-CNN
-
-Dataset
-
-CIFAR-10
-
-Semilla
-
-59
-
-Épocas
-
-10
-
-Batch Size
-
-64
-
-Learning Rate
-
-0.001
-
-Función de pérdida
-
-CrossEntropyLoss
-
-Optimizador
-
-Adam
-
-Conjunto de entrenamiento
-
-40 000 imágenes
-
-Conjunto de validación
-
-10 000 imágenes
-
-Conjunto de prueba
-
-10 000 imágenes
-
-7.2. Función de pérdida
+## 7.2. Función de pérdida
 
 Se utilizó CrossEntropyLoss para medir la diferencia entre las predicciones del modelo y las etiquetas reales.
 
@@ -528,7 +371,7 @@ Esta función es adecuada para problemas de clasificación multiclase.
 
 Durante el entrenamiento, el objetivo es minimizar la pérdida mediante la actualización de los parámetros de la red neuronal.
 
-7.3. Optimizador Adam
+## 7.3. Optimizador Adam
 
 Se utilizó Adam como algoritmo de optimización.
 
@@ -536,111 +379,86 @@ Adam ajusta los parámetros del modelo mediante estimaciones adaptativas basadas
 
 El optimizador permite actualizar los pesos de la CNN durante el proceso de retropropagación.
 
-7.4. Ciclo de entrenamiento
+## 7.4. Ciclo de entrenamiento
 
 El entrenamiento se implementó mediante un bucle iterativo de diez épocas.
 
 Durante cada época se realizaron las siguientes operaciones:
 
-Carga de lotes de imágenes.
-
-Propagación hacia adelante (Forward Pass).
-
-Cálculo de la pérdida.
-
-Cálculo de gradientes mediante Backpropagation.
-
-Actualización de pesos mediante Adam.
-
-Cálculo de accuracy y loss de entrenamiento.
-
-Evaluación del modelo con el conjunto de validación.
-
-Registro de métricas.
+1. Carga de lotes de imágenes.
+2. Propagación hacia adelante (Forward Pass).
+3. Cálculo de la pérdida.
+4. Cálculo de gradientes mediante Backpropagation.
+5. Actualización de pesos mediante Adam.
+6. Cálculo de accuracy y loss de entrenamiento.
+7. Evaluación del modelo con el conjunto de validación.
+8. Registro de métricas.
 
 El código correspondiente se encuentra en:
 
-src/train.py
+`src/train.py`
 
-8. RESULTADOS DEL ENTRENAMIENTO
+---
+
+# 8. RESULTADOS DEL ENTRENAMIENTO
 
 Los resultados se obtuvieron mediante la ejecución del modelo con la semilla individual 59.
 
-8.1. Métricas de rendimiento
+## 8.1. Métricas de rendimiento
 
-Completar con los valores reales de outputs/metrics.json.
+**Completar con los valores reales de `outputs/metrics.json`.**
 
-Métrica
+| Métrica | Resultado |
+|---|---|
+| Accuracy final de entrenamiento | [PENDIENTE] |
+| Accuracy final de validación | [PENDIENTE] |
+| Accuracy de prueba | [PENDIENTE] |
+| Loss final de entrenamiento | [PENDIENTE] |
+| Loss final de validación | [PENDIENTE] |
+| Loss de prueba | [PENDIENTE] |
 
-Resultado
-
-Accuracy final de entrenamiento
-
-[PENDIENTE]
-
-Accuracy final de validación
-
-[PENDIENTE]
-
-Accuracy de prueba
-
-[PENDIENTE]
-
-Loss final de entrenamiento
-
-[PENDIENTE]
-
-Loss final de validación
-
-[PENDIENTE]
-
-Loss de prueba
-
-[PENDIENTE]
-
-8.2. Curvas de aprendizaje
+## 8.2. Curvas de aprendizaje
 
 Durante el entrenamiento se registraron los valores de pérdida y exactitud correspondientes a los conjuntos de entrenamiento y validación.
 
 Los resultados se representan mediante las siguientes curvas:
 
-
+![Curvas de aprendizaje](outputs/loss_accuracy.png)
 
 Las curvas permiten observar la evolución del aprendizaje a lo largo de las épocas y comparar el rendimiento entre entrenamiento y validación.
 
-8.3. Matriz de confusión
+## 8.3. Matriz de confusión
 
 Se generó una matriz de confusión utilizando las predicciones realizadas sobre el conjunto de prueba.
 
-
+![Matriz de confusión](outputs/confusion_matrix.png)
 
 La matriz permite identificar:
 
-Clasificaciones correctas.
-
-Errores de clasificación.
-
-Categorías con mayor dificultad de reconocimiento.
-
-Posibles confusiones entre clases visualmente similares.
+- Clasificaciones correctas.
+- Errores de clasificación.
+- Categorías con mayor dificultad de reconocimiento.
+- Posibles confusiones entre clases visualmente similares.
 
 Los valores de la diagonal principal representan las clasificaciones correctas.
 
 Los valores fuera de la diagonal representan las clasificaciones incorrectas.
 
-9. ANÁLISIS CRÍTICO DE LOS RESULTADOS
+---
 
-9.1. Interpretación de Accuracy
+# 9. ANÁLISIS CRÍTICO DE LOS RESULTADOS
+
+## 9.1. Interpretación de Accuracy
 
 La exactitud o accuracy representa la proporción de imágenes clasificadas correctamente respecto al total de imágenes evaluadas.
 
 Se calcula mediante:
 
-Accuracy = (Predicciones correctas / Total de predicciones) × 100
+**Accuracy = (Predicciones correctas / Total de predicciones) × 100**
 
 Para analizar el rendimiento del modelo, deben compararse los resultados obtenidos durante el entrenamiento, la validación y la prueba.
 
-9.2. Interpretación de Loss
+## 9.2. Interpretación de Loss
 
 La pérdida representa el error del modelo de acuerdo con la función CrossEntropyLoss.
 
@@ -648,50 +466,46 @@ Una reducción progresiva de la pérdida durante el entrenamiento generalmente i
 
 Sin embargo, es necesario comparar la evolución de las pérdidas de entrenamiento y validación para evaluar la capacidad de generalización.
 
-9.3. Análisis de Overfitting
+## 9.3. Análisis de Overfitting
 
 El overfitting o sobreajuste ocurre cuando el modelo aprende patrones demasiado específicos de los datos de entrenamiento y presenta dificultades para generalizar a imágenes no utilizadas durante dicho proceso.
 
 Entre sus posibles indicadores se encuentran:
 
-Accuracy de entrenamiento considerablemente superior al de validación.
+- Accuracy de entrenamiento considerablemente superior al de validación.
+- Disminución continua de la pérdida de entrenamiento.
+- Incremento de la pérdida de validación después de determinadas épocas.
 
-Disminución continua de la pérdida de entrenamiento.
-
-Incremento de la pérdida de validación después de determinadas épocas.
-
-9.4. Análisis de Underfitting
+## 9.4. Análisis de Underfitting
 
 El underfitting o subajuste ocurre cuando el modelo no logra aprender adecuadamente los patrones de los datos.
 
 Puede manifestarse mediante:
 
-Accuracy bajo tanto en entrenamiento como en validación.
+- Accuracy bajo tanto en entrenamiento como en validación.
+- Pérdidas elevadas en ambos conjuntos.
+- Escasa mejora durante las épocas de entrenamiento.
 
-Pérdidas elevadas en ambos conjuntos.
+## 9.5. Diagnóstico del modelo entrenado
 
-Escasa mejora durante las épocas de entrenamiento.
-
-9.5. Diagnóstico del modelo entrenado
-
-Pendiente de completar con las métricas reales.
+**Pendiente de completar con las métricas reales.**
 
 Para determinar si el modelo presenta sobreajuste o subajuste, se analizarán:
 
-La diferencia entre accuracy de entrenamiento y validación.
-
-La evolución de las pérdidas durante las diez épocas.
-
-El rendimiento final sobre el conjunto de prueba.
-
-Los errores identificados en la matriz de confusión.
+1. La diferencia entre accuracy de entrenamiento y validación.
+2. La evolución de las pérdidas durante las diez épocas.
+3. El rendimiento final sobre el conjunto de prueba.
+4. Los errores identificados en la matriz de confusión.
 
 La conclusión definitiva se establecerá utilizando los resultados cuantitativos obtenidos durante la ejecución.
 
-10. ESTRUCTURA DEL REPOSITORIO
+---
+
+# 10. ESTRUCTURA DEL REPOSITORIO
 
 El proyecto se encuentra organizado de acuerdo con la estructura solicitada para la evaluación.
 
+```text
 Evaluacion_IA_CNN_Semilla59/
 │
 ├── src/
@@ -711,123 +525,111 @@ Evaluacion_IA_CNN_Semilla59/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
+```
 
-10.1. Descripción de archivos
+## 10.1. Descripción de archivos
 
-Archivo
+| Archivo | Descripción |
+|---|---|
+| dataset.py | Carga, visualización, transformaciones y partición de CIFAR-10 |
+| model.py | Arquitectura CNN y validación de tensores 4D |
+| train.py | Entrenamiento y evaluación del modelo |
+| experiment.ipynb | Notebook de experimentación en Google Colab |
+| samples.png | Visualización de imágenes del dataset |
+| loss_accuracy.png | Curvas de pérdida y exactitud |
+| confusion_matrix.png | Matriz de confusión |
+| metrics.json | Resultados numéricos del entrenamiento |
+| README.md | Documentación técnica y análisis del proyecto |
+| requirements.txt | Dependencias necesarias |
 
-Descripción
+---
 
-dataset.py
+# 11. INSTRUCCIONES DE EJECUCIÓN
 
-Carga, visualización, transformaciones y partición de CIFAR-10
-
-model.py
-
-Arquitectura CNN y validación de tensores 4D
-
-train.py
-
-Entrenamiento y evaluación del modelo
-
-experiment.ipynb
-
-Notebook de experimentación en Google Colab
-
-samples.png
-
-Visualización de imágenes del dataset
-
-loss_accuracy.png
-
-Curvas de pérdida y exactitud
-
-confusion_matrix.png
-
-Matriz de confusión
-
-metrics.json
-
-Resultados numéricos del entrenamiento
-
-README.md
-
-Documentación técnica y análisis del proyecto
-
-requirements.txt
-
-Dependencias necesarias
-
-11. INSTRUCCIONES DE EJECUCIÓN
-
-11.1. Requisitos
+## 11.1. Requisitos
 
 El proyecto utiliza:
 
-Python.
+- Python.
+- PyTorch.
+- Torchvision.
+- NumPy.
+- Matplotlib.
+- Scikit-learn.
 
-PyTorch.
-
-Torchvision.
-
-NumPy.
-
-Matplotlib.
-
-Scikit-learn.
-
-11.2. Instalación de dependencias
+## 11.2. Instalación de dependencias
 
 Desde la carpeta principal del proyecto, ejecutar:
 
+```bash
 pip install -r requirements.txt
+```
 
-11.3. Exploración del dataset
+## 11.3. Exploración del dataset
 
+```bash
 python src/dataset.py
+```
 
-11.4. Validación de arquitectura y tensores
+## 11.4. Validación de arquitectura y tensores
 
+```bash
 python src/model.py
+```
 
-11.5. Entrenamiento del modelo
+## 11.5. Entrenamiento del modelo
 
+```bash
 python src/train.py --epochs 10
+```
 
-11.6. Ejecución mediante Google Colab
+## 11.6. Ejecución mediante Google Colab
 
 El proyecto también puede ejecutarse mediante el notebook:
 
-notebooks/experiment.ipynb
+`notebooks/experiment.ipynb`
 
 Para utilizarlo:
 
-Abrir Google Colab.
+1. Abrir Google Colab.
+2. Subir el notebook.
+3. Activar una GPU, si está disponible.
+4. Ejecutar las celdas siguiendo el orden establecido.
+5. Descargar los resultados generados.
+6. Incorporar los gráficos y métricas al repositorio de GitHub.
 
-Subir el notebook.
+---
 
-Activar una GPU, si está disponible.
+# 12. CONCLUSIONES
 
-Ejecutar las celdas siguiendo el orden establecido.
+1. Se desarrolló una arquitectura de Red Neuronal Convolucional orientada a la clasificación de imágenes RGB del dataset CIFAR-10.
 
-Descargar los resultados generados.
+2. La utilización de convoluciones permite aprovechar las relaciones espaciales de las imágenes mediante filtros locales y compartición de parámetros.
 
-Incorporar los gráficos y métricas al repositorio de GitHub.
+3. La partición estratificada permitió organizar los datos en conjuntos de entrenamiento y validación, manteniendo la representación de las diez clases.
 
-12. CONCLUSIONES
+4. La implementación de tres bloques convolucionales permitió transformar progresivamente los tensores de entrada hasta obtener representaciones adecuadas para las capas densas.
 
-Se desarrolló una arquitectura de Red Neuronal Convolucional orientada a la clasificación de imágenes RGB del dataset CIFAR-10.
+5. La validación del Forward Pass permitió comprobar la compatibilidad dimensional de los tensores durante su procesamiento.
 
-La utilización de convoluciones permite aprovechar las relaciones espaciales de las imágenes mediante filtros locales y compartición de parámetros.
+6. La utilización de CrossEntropyLoss y Adam permitió implementar un procedimiento de optimización supervisada para la clasificación multiclase.
 
-La partición estratificada permitió organizar los datos en conjuntos de entrenamiento y validación, manteniendo la representación de las diez clases.
+7. Las curvas de aprendizaje y la matriz de confusión constituyen herramientas fundamentales para evaluar el rendimiento del modelo.
 
-La implementación de tres bloques convolucionales permitió transformar progresivamente los tensores de entrada hasta obtener representaciones adecuadas para las capas densas.
+8. La determinación final de posibles síntomas de overfitting o underfitting requiere interpretar las métricas reales obtenidas durante el entrenamiento y la evaluación.
 
-La validación del Forward Pass permitió comprobar la compatibilidad dimensional de los tensores durante su procesamiento.
+---
 
-La utilización de CrossEntropyLoss y Adam permitió implementar un procedimiento de optimización supervisada para la clasificación multiclase.
+# 13. REFERENCIAS
 
-Las curvas de aprendizaje y la matriz de confusión constituyen herramientas fundamentales para evaluar el rendimiento del modelo.
+Krizhevsky, A. (2009). *Learning multiple layers of features from tiny images*. University of Toronto.
 
-La determinación final de posibles síntomas de overfitting o underfitting requiere interpretar las métricas reales obtenidas durante el entrenamiento y la evaluación.
+Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep learning*. MIT Press.
+
+Paszke, A., et al. (2019). *PyTorch: An imperative style, high-performance deep learning library*. Advances in Neural Information Processing Systems, 32.
+
+---
+
+**Universidad Andina del Cusco**  
+**Departamento Académico de Ingeniería de Sistemas**  
+**Evaluación de la Segunda Unidad – Inteligencia Artificial**
