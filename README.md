@@ -397,109 +397,201 @@ Durante cada época se realizaron las siguientes operaciones:
 El código correspondiente se encuentra en:
 
 `src/train.py`
-
----
-
 # 8. RESULTADOS DEL ENTRENAMIENTO
 
-Los resultados se obtuvieron mediante la ejecución del modelo con la semilla individual 59.
+El modelo CNN fue entrenado durante 10 épocas utilizando el dataset CIFAR-10 y la semilla individual 59.
 
-## 8.1. Métricas de rendimiento
+Durante el proceso se registraron las métricas de pérdida (Loss) y exactitud (Accuracy) correspondientes a los conjuntos de entrenamiento y validación.
 
-**Completar con los valores reales de `outputs/metrics.json`.**
+Posteriormente, se realizó la evaluación final sobre el conjunto independiente de prueba.
+
+## 8.1. Métricas finales de rendimiento
 
 | Métrica | Resultado |
-|---|---|
-| Accuracy final de entrenamiento | [PENDIENTE] |
-| Accuracy final de validación | [PENDIENTE] |
-| Accuracy de prueba | [PENDIENTE] |
-| Loss final de entrenamiento | [PENDIENTE] |
-| Loss final de validación | [PENDIENTE] |
-| Loss de prueba | [PENDIENTE] |
+|---|---:|
+| Semilla utilizada | 59 |
+| Número de épocas | 10 |
+| Accuracy de entrenamiento | 73,29 % |
+| Accuracy de validación | 76,32 % |
+| Accuracy de prueba | 76,16 % |
+| Loss de entrenamiento | 0,7605 |
+| Loss de validación | 0,6768 |
+| Loss de prueba | 0,6906 |
 
-## 8.2. Curvas de aprendizaje
+Los resultados muestran que la CNN alcanzó una exactitud del **76,16 % sobre el conjunto de prueba**, lo que representa 7 616 imágenes correctamente clasificadas de un total de 10 000.
 
-Durante el entrenamiento se registraron los valores de pérdida y exactitud correspondientes a los conjuntos de entrenamiento y validación.
+La diferencia entre la exactitud de validación y prueba fue de apenas 0,16 puntos porcentuales, lo cual indica un comportamiento similar del modelo en ambos conjuntos de evaluación.
 
-Los resultados se representan mediante las siguientes curvas:
+## 8.2. Evolución del entrenamiento
+
+La siguiente tabla presenta las métricas registradas durante las diez épocas.
+
+| Época | Train Loss | Val Loss | Train Accuracy | Val Accuracy |
+|---|---:|---:|---:|---:|
+| 1 | 1,6906 | 1,4185 | 37,64 % | 47,51 % |
+| 2 | 1,3410 | 1,1797 | 51,44 % | 57,27 % |
+| 3 | 1,1793 | 1,0778 | 57,82 % | 60,95 % |
+| 4 | 1,0614 | 0,9353 | 62,50 % | 66,72 % |
+| 5 | 0,9786 | 0,8748 | 65,58 % | 68,60 % |
+| 6 | 0,9160 | 0,7921 | 67,72 % | 72,04 % |
+| 7 | 0,8631 | 0,7476 | 69,70 % | 73,59 % |
+| 8 | 0,8177 | 0,7438 | 71,28 % | 73,78 % |
+| 9 | 0,7893 | 0,7671 | 72,24 % | 72,83 % |
+| 10 | 0,7605 | 0,6768 | 73,29 % | 76,32 % |
+
+### Interpretación de la evolución
+
+Durante la primera época, el modelo obtuvo una exactitud de entrenamiento del 37,64 % y una exactitud de validación del 47,51 %.
+
+A medida que avanzó el entrenamiento, ambas métricas aumentaron progresivamente.
+
+En la décima época, la exactitud de entrenamiento alcanzó el 73,29 %, mientras que la exactitud de validación llegó al 76,32 %.
+
+Esto representa una mejora de:
+
+- **35,66 puntos porcentuales** en entrenamiento.
+- **28,81 puntos porcentuales** en validación.
+
+Asimismo, la pérdida de entrenamiento disminuyó desde 1,6906 hasta 0,7605, mientras que la pérdida de validación se redujo desde 1,4185 hasta 0,6768.
+
+Estos resultados evidencian que la red neuronal logró aprender características relevantes para clasificar las imágenes del dataset CIFAR-10.
+
+## 8.3. Curvas de aprendizaje
+
+Las curvas de aprendizaje permiten visualizar la evolución de las métricas durante el entrenamiento.
 
 ![Curvas de aprendizaje](outputs/loss_accuracy.png)
 
-Las curvas permiten observar la evolución del aprendizaje a lo largo de las épocas y comparar el rendimiento entre entrenamiento y validación.
+### Análisis de las curvas
 
-## 8.3. Matriz de confusión
+La pérdida de entrenamiento presentó una disminución sostenida durante las diez épocas, pasando de 1,6906 a 0,7605.
 
-Se generó una matriz de confusión utilizando las predicciones realizadas sobre el conjunto de prueba.
+La pérdida de validación también mostró una tendencia general descendente, aunque presentó un ligero incremento durante la novena época.
+
+En la décima época, la pérdida de validación alcanzó su valor mínimo de 0,6768.
+
+Por otro lado, las exactitudes de entrenamiento y validación aumentaron de manera general a lo largo del proceso.
+
+Este comportamiento indica que el modelo mejoró progresivamente su capacidad para identificar patrones visuales.
+
+## 8.4. Matriz de confusión
+
+La matriz de confusión se generó utilizando las predicciones realizadas sobre las 10 000 imágenes del conjunto de prueba.
 
 ![Matriz de confusión](outputs/confusion_matrix.png)
 
-La matriz permite identificar:
+La matriz permite identificar las clasificaciones correctas e incorrectas para cada una de las diez categorías de CIFAR-10.
 
-- Clasificaciones correctas.
-- Errores de clasificación.
-- Categorías con mayor dificultad de reconocimiento.
-- Posibles confusiones entre clases visualmente similares.
+Los valores de la diagonal principal representan las predicciones correctas, mientras que los valores fuera de ella representan errores de clasificación.
 
-Los valores de la diagonal principal representan las clasificaciones correctas.
+El modelo obtuvo una exactitud global de prueba del 76,16 %, equivalente a 7 616 predicciones correctas y 2 384 incorrectas.
 
-Los valores fuera de la diagonal representan las clasificaciones incorrectas.
+Para determinar qué clases presentan mayores dificultades de clasificación, es necesario analizar los valores individuales de la matriz.
 
 ---
 
 # 9. ANÁLISIS CRÍTICO DE LOS RESULTADOS
 
-## 9.1. Interpretación de Accuracy
+## 9.1. Análisis de la capacidad de aprendizaje
 
-La exactitud o accuracy representa la proporción de imágenes clasificadas correctamente respecto al total de imágenes evaluadas.
+Los resultados evidencian que la arquitectura CNN implementada logró aprender características relevantes del dataset CIFAR-10.
 
-Se calcula mediante:
+Durante las diez épocas, la exactitud de entrenamiento aumentó desde el 37,64 % hasta el 73,29 %.
 
-**Accuracy = (Predicciones correctas / Total de predicciones) × 100**
+Simultáneamente, la pérdida de entrenamiento disminuyó desde 1,6906 hasta 0,7605.
 
-Para analizar el rendimiento del modelo, deben compararse los resultados obtenidos durante el entrenamiento, la validación y la prueba.
+Estos cambios muestran que el proceso de optimización permitió mejorar progresivamente las predicciones de la red neuronal.
 
-## 9.2. Interpretación de Loss
+## 9.2. Análisis de Overfitting
 
-La pérdida representa el error del modelo de acuerdo con la función CrossEntropyLoss.
+El overfitting o sobreajuste ocurre cuando un modelo obtiene un rendimiento considerablemente superior sobre los datos de entrenamiento en comparación con los datos de validación o prueba.
 
-Una reducción progresiva de la pérdida durante el entrenamiento generalmente indica que la red neuronal está ajustando sus parámetros.
+En el experimento realizado se obtuvieron los siguientes resultados:
 
-Sin embargo, es necesario comparar la evolución de las pérdidas de entrenamiento y validación para evaluar la capacidad de generalización.
+- Accuracy de entrenamiento: 73,29 %.
+- Accuracy de validación: 76,32 %.
+- Accuracy de prueba: 76,16 %.
 
-## 9.3. Análisis de Overfitting
+La diferencia entre entrenamiento y validación fue de **−3,03 puntos porcentuales**.
 
-El overfitting o sobreajuste ocurre cuando el modelo aprende patrones demasiado específicos de los datos de entrenamiento y presenta dificultades para generalizar a imágenes no utilizadas durante dicho proceso.
+Esto significa que la exactitud de validación fue ligeramente superior a la de entrenamiento.
 
-Entre sus posibles indicadores se encuentran:
+Además, la pérdida de validación terminó en 0,6768, un valor inferior a la pérdida de entrenamiento de 0,7605.
 
-- Accuracy de entrenamiento considerablemente superior al de validación.
-- Disminución continua de la pérdida de entrenamiento.
-- Incremento de la pérdida de validación después de determinadas épocas.
+Por lo tanto, **no se identifican señales claras de sobreajuste al finalizar las diez épocas**.
 
-## 9.4. Análisis de Underfitting
+La diferencia observada puede estar relacionada con el uso de técnicas de aumento de datos y regularización durante el entrenamiento.
 
-El underfitting o subajuste ocurre cuando el modelo no logra aprender adecuadamente los patrones de los datos.
+En particular, RandomCrop y RandomHorizontalFlip incrementan la variabilidad de las imágenes utilizadas para aprender, mientras que Dropout introduce regularización en la arquitectura.
 
-Puede manifestarse mediante:
+No obstante, estas diferencias deben interpretarse con cautela, ya que las métricas de entrenamiento y validación se obtienen bajo condiciones distintas.
 
-- Accuracy bajo tanto en entrenamiento como en validación.
-- Pérdidas elevadas en ambos conjuntos.
-- Escasa mejora durante las épocas de entrenamiento.
+## 9.3. Análisis de Underfitting
 
-## 9.5. Diagnóstico del modelo entrenado
+El underfitting o subajuste ocurre cuando un modelo presenta dificultades para aprender los patrones presentes en los datos.
 
-**Pendiente de completar con las métricas reales.**
+En este experimento, la exactitud de entrenamiento aumentó progresivamente hasta alcanzar el 73,29 %, mientras que la exactitud de validación llegó al 76,32 %.
 
-Para determinar si el modelo presenta sobreajuste o subajuste, se analizarán:
+Asimismo, ambas pérdidas mostraron una tendencia general descendente.
 
-1. La diferencia entre accuracy de entrenamiento y validación.
-2. La evolución de las pérdidas durante las diez épocas.
-3. El rendimiento final sobre el conjunto de prueba.
-4. Los errores identificados en la matriz de confusión.
+Estos resultados indican que la CNN consiguió aprender características útiles para la clasificación de imágenes.
 
-La conclusión definitiva se establecerá utilizando los resultados cuantitativos obtenidos durante la ejecución.
+Por consiguiente, **no se observa un subajuste severo**.
+
+Sin embargo, el rendimiento obtenido todavía presenta margen de mejora, por lo que sería conveniente experimentar con un mayor número de épocas, ajustes en la arquitectura y estrategias adicionales de regularización.
+
+## 9.4. Análisis de generalización
+
+La capacidad de generalización representa el rendimiento de un modelo sobre datos que no fueron utilizados durante su entrenamiento.
+
+En el presente experimento se obtuvo:
+
+- Accuracy de validación: 76,32 %.
+- Accuracy de prueba: 76,16 %.
+
+La diferencia absoluta entre ambas métricas fue de **0,16 puntos porcentuales**.
+
+Esta diferencia reducida sugiere que el modelo mantiene un rendimiento similar sobre los conjuntos de validación y prueba.
+
+Por lo tanto, los resultados proporcionan evidencia favorable sobre su capacidad de generalización dentro de las condiciones del experimento.
+
+## 9.5. Diagnóstico general del modelo
+
+A partir del análisis cuantitativo de las métricas, se concluye lo siguiente:
+
+1. La CNN presentó una mejora progresiva en sus métricas de entrenamiento.
+2. La pérdida disminuyó de manera sostenida durante las diez épocas.
+3. La exactitud de validación alcanzó el 76,32 %.
+4. La exactitud de prueba fue del 76,16 %.
+5. No se identificaron señales claras de overfitting al finalizar el entrenamiento.
+6. No se observó underfitting severo, aunque existe margen de mejora.
+7. La similitud entre las métricas de validación y prueba sugiere una capacidad de generalización razonable.
+
+En términos generales, la arquitectura CNN implementada presentó un comportamiento satisfactorio para un experimento inicial de clasificación de imágenes CIFAR-10.
 
 ---
+
+# 12. CONCLUSIONES
+
+1. Se implementó una Red Neuronal Convolucional utilizando PyTorch para clasificar imágenes RGB del dataset CIFAR-10, compuesto por diez categorías.
+
+2. Se aplicó una partición estratificada utilizando la semilla individual 59, obteniendo 40 000 imágenes para entrenamiento, 10 000 para validación y 10 000 para prueba.
+
+3. La arquitectura implementada, compuesta por tres bloques convolucionales y capas densamente conectadas, permitió procesar correctamente tensores 4D y generar predicciones para las diez clases.
+
+4. El entrenamiento durante diez épocas permitió incrementar la exactitud de entrenamiento desde el 37,64 % hasta el 73,29 %, evidenciando un proceso progresivo de aprendizaje.
+
+5. El modelo alcanzó una exactitud de validación del 76,32 % y una exactitud de prueba del 76,16 %, demostrando un rendimiento similar en ambos conjuntos.
+
+6. La pérdida de entrenamiento disminuyó desde 1,6906 hasta 0,7605, mientras que la pérdida de validación alcanzó 0,6768 al finalizar el entrenamiento.
+
+7. El análisis de las métricas no evidenció señales claras de sobreajuste ni de subajuste severo durante las diez épocas evaluadas.
+
+8. La diferencia de 0,16 puntos porcentuales entre la exactitud de validación y prueba sugiere que el modelo presenta una capacidad de generalización razonable.
+
+9. Las curvas de aprendizaje y la matriz de confusión permitieron evaluar cuantitativamente el comportamiento del modelo y visualizar sus resultados.
+
+10. Finalmente, el proyecto demuestra la aplicación práctica de redes neuronales convolucionales, manipulación de tensores 4D, técnicas de aumento de datos y métricas de evaluación para resolver un problema de clasificación de imágenes mediante aprendizaje profundo.
 
 # 10. ESTRUCTURA DEL REPOSITORIO
 
